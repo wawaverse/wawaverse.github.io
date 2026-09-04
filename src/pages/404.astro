@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="@_@" description="page not found" showLogo={false} showHeader={false} showFooter={false}>
+  <div class="not-found">
+    <img src="/cat.gif" alt="cat" class="cat-img" />
+    <h1>oops!</h1>
+    <p>this page doesn't seem to exist, sorry!</p>
+    <a href="/" class="home-link">home</a>
+  </div>
+</BaseLayout>
+
+<style>
+  .not-found {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 80vh;
+    gap: 0.5rem;
+  }
+
+  .cat-img {
+    height: auto;
+    max-width: 150px;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    color: #ebbcba;
+    font-size: 2rem;
+    margin: 0;
+  }
+
+  p {
+    font-size: 1.1rem;
+    margin: 0 0 1.5rem 0;
+    color: #e0def4;
+  }
+
+  .home-link {
+    color: #ebbcba;
+    font-size: 1.1rem;
+  }
+</style>
+

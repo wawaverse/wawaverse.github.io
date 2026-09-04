@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PinIcon from '../components/PinIcon.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+
+const postsOnly = allPosts.filter((p) => p.data.category !== 'poetry');
+
+type GroupedPost = {
+  key: string;
+  primaryPost: (typeof allPosts)[0];
+  enPost?: (typeof allPosts)[0];
+  itPost?: (typeof allPosts)[0];
+  hasEn: boolean;
+  hasIt: boolean;
+  pubDate: Date;
+  pinned: boolean;
+};
+
+const groupsMap = new Map<string, (typeof allPosts)[0][]>();
+
+for (const post of postsOnly) {
+  const key = post.data.translationKey || post.id;
+  const existing = groupsMap.get(key) || [];
+  existing.push(post);
+  groupsMap.set(key, existing);
+}
+
+const groupedPosts: GroupedPost[] = Array.from(groupsMap.entries()).map(([key, posts]) => {
+  const enPost = posts.find((p) => p.data.lang === 'en');
+  const itPost = posts.find((p) => p.data.lang === 'it');
+  const primaryPost = enPost || itPost || posts[0];
+  const pubDate = primaryPost.data.pubDate;
+  const pinned = posts.some((p) => p.data.pinned);
+
+  return {
+    key,
+    primaryPost,
+    enPost,
+    itPost,
+    hasEn: !!enPost,
+    hasIt: !!itPost,
+    pubDate,
+    pinned
+  };
+});
+
+groupedPosts.sort((a, b) => {
+  if (a.pinned !== b.pinned) {
+    return a.pinned ? -1 : 1;
+  }
+  return b.pubDate.valueOf() - a.pubDate.valueOf();
+});
+
+const formatDate = (date: Date) => {
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit'
+  }).format(date);
+};
+---
+
+<BaseLayout showLogo={true} title="home · yaoi.foundation">
+  <section class="posts-section">
+    <div class="section-header">
+      <h2>posts</h2>
+    </div>
+
+    {groupedPosts.length === 0 ? (
+      <p class="empty-note">no posts yet.</p>
+    ) : (
+      <ul class="posts-list">
+        {groupedPosts.map((item) => (
+          <li class="post-item">
+            <div class="post-title-group">
+              {item.pinned && (
+                <span class="post-pinned" title="pinned">
+                  <PinIcon size={14} class="pin-svg" />
+                </span>
+              )}
+              <a href={`/blog/${item.primaryPost.id}`} class="post-title">
+                {item.primaryPost.data.title}
+              </a>
+              <span class="post-langs">
+                [
+                {item.hasEn && item.hasIt ? (
+                  <>
+                    <a href={`/blog/${item.enPost!.id}`} class="post-lang-link">en</a>
+                    <span class="post-lang-sep">/</span>
+                    <a href={`/blog/${item.itPost!.id}`} class="post-lang-link">it</a>
+                  </>
+                ) : item.hasEn ? (
+                  <span class="post-lang-static">en</span>
+                ) : (
+                  <span class="post-lang-static">it</span>
+                )}
+                ]
+              </span>
+            </div>
+            <time datetime={item.pubDate.toISOString()} class="post-date">
+              {formatDate(item.pubDate)}
+            </time>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .posts-section {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .section-header {
+    margin-bottom: 1rem;
+    border-bottom: 1px dashed #524f67;
+    padding-bottom: 0.5rem;
+  }
+
+  .section-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+
+  .posts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .post-title-group {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .post-pinned {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ebbcba;
+    flex-shrink: 0;
+  }
+
+  .pin-svg {
+    display: block;
+    color: #ebbcba;
+  }
+
+  .post-langs {
+    color: #6e6a86;
+    font-size: 0.85rem;
+    user-select: none;
+  }
+
+  .post-lang-link {
+    color: #908caa;
+  }
+
+  .post-lang-link:hover {
+    color: #ebbcba;
+    text-decoration: underline;
+  }
+
+  .post-lang-sep {
+    color: #524f67;
+  }
+
+  .post-lang-static {
+    color: #6e6a86;
+  }
+
+  .empty-note {
+    text-align: center;
+    color: #6e6a86;
+  }
+</style>

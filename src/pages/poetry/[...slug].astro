@@ -1,0 +1,32 @@
+---
+import { getCollection, render } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  const poetryPosts = allPosts.filter((p) => p.data.category === 'poetry');
+
+  return poetryPosts.map((post) => {
+    const translations = poetryPosts
+      .filter((p) => p.data.translationKey && p.data.translationKey === post.data.translationKey && p.id !== post.id)
+      .map((p) => ({
+        lang: p.data.lang,
+        slug: p.id,
+        title: p.data.title
+      }));
+
+    return {
+      params: { slug: post.id },
+      props: { post, translations }
+    };
+  });
+}
+
+const { post, translations } = Astro.props;
+const { Content } = await render(post);
+---
+
+<PostLayout {...post.data} translations={translations}>
+  <Content />
+</PostLayout>
+

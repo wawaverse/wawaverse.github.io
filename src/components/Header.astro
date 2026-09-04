@@ -1,0 +1,57 @@
+---
+interface Props {
+  showLogo?: boolean;
+  showNav?: boolean;
+}
+
+const { showLogo = false, showNav = true } = Astro.props;
+---
+
+{(showLogo || showNav) && (
+  <header class="header">
+    {showLogo && (
+      <img src="/Logo.svg" alt="yaoi.foundation" class="logo" />
+    )}
+    {showNav && (
+      <nav class="nav">
+        <a href="/" class="nav-link">home</a>
+        <span class="nav-sep">·</span>
+        <a href="/poetry" class="nav-link">poetry</a>
+      </nav>
+    )}
+  </header>
+)}
+
+<style>
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.05rem;
+    margin-top: 0.25rem;
+  }
+
+  .nav-link {
+    color: #ebbcba;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .nav-link:hover {
+    color: #ebbcba;
+    text-decoration: underline;
+    opacity: 0.85;
+  }
+
+  .nav-sep {
+    color: #524f67;
+  }
+</style>

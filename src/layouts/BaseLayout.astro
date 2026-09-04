@@ -1,0 +1,66 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '@fontsource-variable/atkinson-hyperlegible-next';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  showLogo?: boolean;
+  showNav?: boolean;
+  showHeader?: boolean;
+  showFooter?: boolean;
+}
+
+const {
+  title = 'yaoi.foundation',
+  description = "dani's stuff!",
+  image = '/Favicon.png',
+  showLogo = false,
+  showNav = true,
+  showHeader = true,
+  showFooter = true,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://yaoi.foundation');
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/Favicon.png" />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" type="application/rss+xml" title="yaoi.foundation" href="/rss.xml" />
+    
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:site_name" content="yaoi.foundation" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site || 'https://yaoi.foundation')} />
+  </head>
+  <body>
+    <div class="site-wrapper">
+      {showHeader && <Header showLogo={showLogo} showNav={showNav} />}
+      <main>
+        <slot />
+      </main>
+      {showFooter && <Footer />}
+    </div>
+    <script>
+      import twemoji from '@twemoji/api';
+      twemoji.parse(document.body, {
+        folder: 'svg',
+        ext: '.svg',
+        base: 'https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/'
+      });
+    </script>
+  </body>
+</html>

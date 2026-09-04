@@ -1,0 +1,155 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  tags?: string[];
+  lang?: 'en' | 'it';
+  category?: 'post' | 'poetry';
+  translations?: Array<{
+    lang: string;
+    slug: string;
+    title: string;
+  }>;
+}
+
+const { title, description, pubDate, updatedDate, tags, lang = 'en', category, translations = [] } = Astro.props;
+
+const formattedDate = new Intl.DateTimeFormat(lang === 'it' ? 'it-IT' : 'en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: '2-digit'
+}).format(pubDate);
+
+const isPoetry = category === 'poetry';
+const backUrl = isPoetry ? '/poetry' : '/';
+
+const hasItalian = lang === 'it' || translations.some((t) => t.lang === 'it');
+const hasEnglish = lang === 'en' || translations.some((t) => t.lang === 'en');
+const itTranslation = translations.find((t) => t.lang === 'it');
+const enTranslation = translations.find((t) => t.lang === 'en');
+const basePath = isPoetry ? '/poetry' : '/blog';
+---
+
+<BaseLayout title={`${title} · yaoi.foundation`} description={description} showLogo={false} showHeader={false}>
+  <article class="post">
+    <div class="top-nav">
+      <a href={backUrl} class="back-link">← back</a>
+      {(hasItalian && hasEnglish) && (
+        <div class="lang-switch">
+          <span class="lang-label">lang:</span>
+          {lang === 'en' ? (
+            <span class="lang-active">en</span>
+          ) : (
+            <a href={`${basePath}/${enTranslation?.slug}`} class="lang-link">en</a>
+          )}
+          <span class="lang-sep">/</span>
+          {lang === 'it' ? (
+            <span class="lang-active">it</span>
+          ) : (
+            <a href={`${basePath}/${itTranslation?.slug}`} class="lang-link">it</a>
+          )}
+        </div>
+      )}
+    </div>
+
+    <header class="post-header">
+      <h1 class="post-title">{title}</h1>
+      <div class="post-meta">
+        <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+        {tags && tags.length > 0 && (
+          <span class="tags">
+            {tags.map((tag) => (
+              <span class="tag">#{tag}</span>
+            ))}
+          </span>
+        )}
+      </div>
+    </header>
+
+    <div class="prose">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .post {
+    width: 100%;
+  }
+
+  .top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1.5rem;
+  }
+
+  .back-link {
+    font-size: 1rem;
+  }
+
+  .lang-switch {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+    color: #6e6a86;
+  }
+
+  .lang-label {
+    color: #6e6a86;
+    margin-right: 0.15rem;
+  }
+
+  .lang-active {
+    color: #ebbcba;
+    font-weight: 600;
+  }
+
+  .lang-link {
+    color: #908caa;
+    text-decoration: none;
+  }
+
+  .lang-link:hover {
+    color: #ebbcba;
+    text-decoration: underline;
+  }
+
+  .lang-sep {
+    color: #524f67;
+  }
+
+  .post-header {
+    margin-bottom: 2rem;
+    border-bottom: 1px dashed #524f67;
+    padding-bottom: 1rem;
+  }
+
+  .post-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.6rem;
+  }
+
+  .post-meta {
+    color: #6e6a86;
+    font-size: 0.85rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    color: #9ccfd8;
+  }
+</style>
