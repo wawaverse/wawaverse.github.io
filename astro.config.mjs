@@ -6,7 +6,6 @@ export default defineConfig({
   output: 'static',
   integrations: [sitemap()],
   markdown: {
-    remarkPlugins: [remarkInlineFootnotes],
     shikiConfig: {
       theme: 'rose-pine',
       wrap: true
