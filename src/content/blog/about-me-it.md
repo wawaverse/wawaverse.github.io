@@ -21,7 +21,7 @@ Vivo in Italia e trascorro la maggior parte delle mie giornate facendo passeggia
 - Francese
 - Spagnolo
 
-Uso qualsiasi pronome e sono non-binary, ma di solito preferisco espressioni neutre se posso, a seconda della lingua che sto usando al momento.
+Uso i pronomi lei/ləi/lui e sono non-binary, ma di solito preferisco espressioni neutre se posso, a seconda della lingua che sto usando al momento.
 
 ## Questo blog
 
