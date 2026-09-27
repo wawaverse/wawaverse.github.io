@@ -16,7 +16,7 @@ I'm **Dani**, someone who loves reading, writing and working on creative project
 
 I live in Italy and spend most of my days going on walks, chatting with others and reading. Music 
 is one of the distractions I'm fondest of, some of the genres I mostly listen to are Future Funk, 
-Electronic, VOCALOID in general, Indie Rock & Jazz. I am able to speak 4 languages, some in better ways than the others, as follows (not in order):
+Electronic, VOCALOID in general, Indie Rock & Jazz Pop. I am able to speak 4 languages, some in better ways than the others, as follows (not in order):
 
 - Italian
 - English
