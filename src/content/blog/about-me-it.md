@@ -14,7 +14,7 @@ Sono Dani, una persona che adora leggere, scrivere e lavorare a progetti creativ
 
 ## Qualche dettaglio su di me
 
-Vivo in Italia e trascorro la maggior parte delle mie giornate facendo passeggiate, chiacchierando con le persone e leggendo. La musica è una delle distrazioni che amo di più; tra i generi che ascolto maggiormente ci sono la Future Funk, l'Elettronica, i VOCALOID in generale, l'Indie Rock e il Jazz. Parlo 4 lingue, alcune meglio di altre, nell'ordine seguente (casuale):
+Vivo in Italia e trascorro la maggior parte delle mie giornate facendo passeggiate, chiacchierando con le persone e leggendo. La musica è una delle distrazioni che amo di più; tra i generi che ascolto maggiormente ci sono la Future Funk, l'Elettronica, i VOCALOID in generale, l'Indie Rock e il Jazz Pop. Parlo 4 lingue, alcune meglio di altre, nell'ordine seguente (casuale):
 
 - Italiano
 - Inglese
