@@ -23,7 +23,7 @@ Electronic, VOCALOID in general, Indie Rock & Jazz. I am able to speak 4 languag
 - French
 - Spanish
 
-I use any pronouns and am non binary, but I usually default to gender neutral phrasing if I can, depending on the language I'm using at the moment.
+I use she/they/he pronouns and am non binary, but I usually default to gender neutral phrasing if I can, depending on the language I'm using at the moment.
 
 ## About the blog
 This site is built with an emphasis on minimalism and high readability, using tools & components
