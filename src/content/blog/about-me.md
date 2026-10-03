@@ -42,6 +42,10 @@ All posts shared on this site are under the Creative Commons BY-NC-SA 4.0[^first
 
 ## Cool corners & friends
 - [yuri.foundation](https://yuri.foundation) - unrelated, but lovely regardless!
+- [blanka.lol](https://blanka.lol) - despite what the website will have you believe,
+  funny person on the internet
+- [khitboksy.github.io/blog/](https://khitboksy.github.io/blog/) - blog of taylor,
+  also visit after checking out yaoi.foundation!
 - [glomble.com](https://glomble.com) - independent video sharing platform built to 
 preserve the spirit of early internet culture while also rejecting AI content
 - [clippsly.com](https://clippsly.com) - creator-powered, inclusive music platform
