@@ -4,11 +4,12 @@ import type { APIContext } from 'astro';
 
 export async function GET(context: APIContext) {
   const posts = await getCollection('blog');
+  const listedPosts = posts.filter((post) => !post.data.unlisted);
   return rss({
     title: 'yaoi.foundation',
     description: "dani's stuff!",
     site: context.site || 'https://yaoi.foundation',
-    items: posts.map((post) => ({
+    items: listedPosts.map((post) => ({
       title: post.data.title,
       pubDate: post.data.pubDate,
       description: post.data.description,

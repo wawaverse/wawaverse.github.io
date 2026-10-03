@@ -13,6 +13,7 @@ const blog = defineCollection({
     translationKey: z.string().optional(),
     'translation-key': z.string().optional(),
     pinned: z.boolean().default(false).optional(),
+    unlisted: z.boolean().default(false).optional(),
     category: z.enum(['post', 'poetry']).optional()
   }).transform((data) => ({
     ...data,

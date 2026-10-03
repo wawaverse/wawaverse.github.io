@@ -12,6 +12,7 @@ interface Props {
   showNav?: boolean;
   showHeader?: boolean;
   showFooter?: boolean;
+  noindex?: boolean;
 }
 
 const {
@@ -22,6 +23,7 @@ const {
   showNav = true,
   showHeader = true,
   showFooter = true,
+  noindex = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://yaoi.foundation');
@@ -35,6 +37,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://yaoi.fou
     <link rel="icon" type="image/png" href="/Favicon.png" />
     <link rel="canonical" href={canonicalURL} />
     <link rel="alternate" type="application/rss+xml" title="yaoi.foundation" href="/rss.xml" />
+    {noindex && <meta name="robots" content="noindex" />}
     
     <title>{title}</title>
     <meta name="description" content={description} />

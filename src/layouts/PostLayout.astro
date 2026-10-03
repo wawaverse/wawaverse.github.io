@@ -9,6 +9,7 @@ interface Props {
   tags?: string[];
   lang?: 'en' | 'it';
   category?: 'post' | 'poetry';
+  unlisted?: boolean;
   translations?: Array<{
     lang: string;
     slug: string;
@@ -16,7 +17,7 @@ interface Props {
   }>;
 }
 
-const { title, description, pubDate, updatedDate, tags, lang = 'en', category, translations = [] } = Astro.props;
+const { title, description, pubDate, updatedDate, tags, lang = 'en', category, unlisted = false, translations = [] } = Astro.props;
 
 const formattedDate = new Intl.DateTimeFormat(lang === 'it' ? 'it-IT' : 'en-US', {
   year: 'numeric',
@@ -34,7 +35,7 @@ const enTranslation = translations.find((t) => t.lang === 'en');
 const basePath = isPoetry ? '/poetry' : '/blog';
 ---
 
-<BaseLayout title={`${title} · yaoi.foundation`} description={description} showLogo={false} showHeader={false}>
+<BaseLayout title={`${title} · yaoi.foundation`} description={description} showLogo={false} showHeader={false} noindex={unlisted}>
   <article class="post">
     <div class="top-nav">
       <a href={backUrl} class="back-link">← back</a>
@@ -106,7 +107,7 @@ const basePath = isPoetry ? '/poetry' : '/blog';
   }
 
   .lang-active {
-    color: #ebbcba;
+    color: #c4a7e7;
     font-weight: 600;
   }
 
@@ -116,7 +117,7 @@ const basePath = isPoetry ? '/poetry' : '/blog';
   }
 
   .lang-link:hover {
-    color: #ebbcba;
+    color: #c4a7e7;
     text-decoration: underline;
   }
 

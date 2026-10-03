@@ -5,7 +5,7 @@ import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog');
 
-const postsOnly = allPosts.filter((p) => p.data.category !== 'poetry');
+const postsOnly = allPosts.filter((p) => p.data.category !== 'poetry' && !p.data.unlisted);
 
 type GroupedPost = {
   key: string;
@@ -143,13 +143,13 @@ const formatDate = (date: Date) => {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #ebbcba;
+    color: #c4a7e7;
     flex-shrink: 0;
   }
 
   .pin-svg {
     display: block;
-    color: #ebbcba;
+    color: #c4a7e7;
   }
 
   .post-langs {
@@ -163,7 +163,7 @@ const formatDate = (date: Date) => {
   }
 
   .post-lang-link:hover {
-    color: #ebbcba;
+    color: #c4a7e7;
     text-decoration: underline;
   }
 

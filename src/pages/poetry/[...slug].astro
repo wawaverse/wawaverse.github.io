@@ -8,7 +8,7 @@ export async function getStaticPaths() {
 
   return poetryPosts.map((post) => {
     const translations = poetryPosts
-      .filter((p) => p.data.translationKey && p.data.translationKey === post.data.translationKey && p.id !== post.id)
+      .filter((p) => p.data.translationKey && p.data.translationKey === post.data.translationKey && p.id !== post.id && (post.data.unlisted || !p.data.unlisted))
       .map((p) => ({
         lang: p.data.lang,
         slug: p.id,
