@@ -41,6 +41,10 @@ Tutti i post condivisi su questo blog sono sotto licenza Creative Commons BY-NC-
 ## Spazi interessanti e amici
 
 - [yuri.foundation](https://yuri.foundation) - non collegato a yaoi.foundation, ma comunque carino!
+- [blanka.lol](https://blanka.lol) - nonostante ciò che dica il sito, persona divertente
+  sul mondo di Internet
+- [khitboksy.github.io/blog/](https://khitboksy.github.io/blog/) - blog di taylor,
+  visita dopo aver dato un'occhiata a yaoi.foundation!
 - [glomble.com](https://glomble.com) - piattaforma indipendente di condivisione video creata per preservare lo spirito degli albori di Internet rifiutando al contempo i contenuti generati da IA
 - [clippsly.com](https://clippsly.com) - piattaforma musicale inclusiva per creatori, pensata per permettere ai propri utenti di scoprire, condividere e pubblicare musica
 
