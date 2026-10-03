@@ -43,7 +43,7 @@ All posts shared on this site are under the Creative Commons BY-NC-SA 4.0[^first
 ## Cool corners & friends
 - [yuri.foundation](https://yuri.foundation) - unrelated, but lovely regardless!
 - [blanka.lol](https://blanka.lol) - despite what the website will have you believe,
-  funny person on the internet
+  funny person on the internet 8)
 - [khitboksy.github.io/blog/](https://khitboksy.github.io/blog/) - blog of taylor,
   also visit after checking out yaoi.foundation!
 - [glomble.com](https://glomble.com) - independent video sharing platform built to 
