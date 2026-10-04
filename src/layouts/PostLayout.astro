@@ -154,3 +154,88 @@ const basePath = isPoetry ? '/poetry' : '/blog';
     color: #9ccfd8;
   }
 </style>
+
+<script>
+  function setupHeadingAnchors() {
+    const headings = document.querySelectorAll<HTMLElement>('.prose :is(h1, h2, h3, h4, h5, h6)');
+    headings.forEach((heading) => {
+      if (heading.classList.contains('sr-only') || heading.closest('.footnotes, [data-footnotes]')) {
+        return;
+      }
+      if (heading.querySelector('.heading-anchor')) {
+        return;
+      }
+
+      if (!heading.id) {
+        const slug = heading.textContent
+          ?.toLowerCase()
+          .trim()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/(^-|-$)/g, '');
+        if (slug) heading.id = slug;
+      }
+      if (!heading.id) return;
+
+      const anchor = document.createElement('a');
+      anchor.className = 'heading-anchor';
+      anchor.href = `#${heading.id}`;
+      anchor.setAttribute('aria-label', `Link to ${heading.textContent?.trim() || 'section'}`);
+      anchor.setAttribute('title', 'Copy link');
+
+      const icon = document.createElement('span');
+      icon.className = 'anchor-icon';
+      icon.textContent = '#';
+
+      const tooltip = document.createElement('span');
+      tooltip.className = 'anchor-tooltip';
+      tooltip.setAttribute('role', 'status');
+      tooltip.setAttribute('aria-live', 'polite');
+      tooltip.textContent = 'Copied!';
+
+      anchor.appendChild(icon);
+      anchor.appendChild(tooltip);
+
+      let copyTimeout: number | undefined;
+
+      anchor.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const url = new URL(window.location.href);
+        url.hash = heading.id;
+        history.pushState(null, '', url.hash);
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(url.href);
+          } else {
+            const textarea = document.createElement('textarea');
+            textarea.value = url.href;
+            textarea.style.position = 'fixed';
+            textarea.style.left = '-9999px';
+            textarea.style.top = '-9999px';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            document.execCommand('copy');
+            textarea.remove();
+          }
+
+          clearTimeout(copyTimeout);
+          anchor.classList.add('copied');
+          copyTimeout = window.setTimeout(() => {
+            anchor.classList.remove('copied');
+          }, 1500);
+        } catch (err) {
+          console.error('Failed to copy link:', err);
+        }
+
+        heading.scrollIntoView({ behavior: 'smooth' });
+      });
+
+      heading.appendChild(anchor);
+    });
+  }
+
+  setupHeadingAnchors();
+  document.addEventListener('astro:page-load', setupHeadingAnchors);
+</script>
