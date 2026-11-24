@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  showHeader={false}
+  showFooter={false}
+  noindex={true}
+>
+  <div class="fun-container">
+    <div class="prose">
+      <img src="/car.gif" alt="" class="car-gif" />
+      <p>
+        I need several piles of money for the operation, maintenance and creation of websites and, above all, for financing my meager queer life, thanks to which I can create such important and undoubtedly societally transformative content. Without my comments on pop cultural trends (and your payroll), Italy will degenerate into Orbán's Hungary within ten hours.
+      </p>
+      <p>
+        Forget your loved ones and other members of your communities who have to face difficult life situations such as difficult financial situations or life-limiting illnesses. I need your money and attention more (after all, who would want to share spaces with people experiencing those difficulties, let alone community).
+      </p>
+      <p>
+        I therefore appeal to your conscience and invite you to <a href="https://give.thetrevorproject.org/" target="_blank" rel="noopener noreferrer">donate accordingly</a>. If you don't pay immediately, the kitty (me) will die of grief and it will be all your fault.
+      </p>
+      <a href="/" class="back-link">&larr; Back to home</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .fun-container {
+    margin: auto 0;
+    width: 100%;
+  }
+
+  .car-gif {
+    display: block;
+    margin: 0 auto 1.5rem;
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+</style>
